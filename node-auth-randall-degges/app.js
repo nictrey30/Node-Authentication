@@ -17,6 +17,7 @@ let User = new mongoose.model(
   new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
+    // 2 users will not be able to register on the website with the same email
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
   })
@@ -24,6 +25,7 @@ let User = new mongoose.model(
 
 app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
+// the next line gives us the req.session object and lets us add any property we want to it
 app.use(
   sessions({
     cookieName: "session",

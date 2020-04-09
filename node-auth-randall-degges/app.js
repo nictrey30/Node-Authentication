@@ -88,7 +88,7 @@ app.get("/login", function (req, res) {
 });
 app.post("/login", function (req, res) {
   User.findOne({ email: req.body.email }, (err, user) => {
-    // if (!user || user.password !== req.body.password) {
+    // bycrypt.compareSync - compares the password from the form with the hashed password in the database
     if (!user || !bycrypt.compareSync(req.body.password, user.password)) {
       return res.render("login", { error: "Incorrect email / password" });
     }
